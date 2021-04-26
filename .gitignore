@@ -1,0 +1,7 @@
+
+*.hdf5
+poem_doc2vec_dbow2000.pkl.docvecs.vectors_docs.npy
+*.npy
+poem_vectors
+line_vectors
+poem_vector_2000.pkl
