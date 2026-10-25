@@ -23,20 +23,20 @@ The notebooks are exploratory and overlap; they are not a single, ordered produc
 
 ## Data provenance and reuse
 
-The report identifies the source as the Poetry Foundation website dataset distributed by John Hallman on Kaggle: [Complete Poetry Foundation Dataset](https://www.kaggle.com/johnhallman/complete-poetryfoundationorg-dataset). The repository includes `kaggle_poem_dataset.csv`, an `archive.zip` containing another CSV that is not byte-for-byte identical to the root CSV, and derived serialized data. The source/version relationship between those two CSVs is not documented.
+The report identifies the source as the Poetry Foundation website dataset distributed by John Hallman on Kaggle: [Complete Poetry Foundation Dataset](https://www.kaggle.com/johnhallman/complete-poetryfoundationorg-dataset). The notebooks reference a local `kaggle_poem_dataset.csv`. That raw CSV and `archive.zip` have been removed from this repository pending rights review. The historical ZIP contained a CSV that was not byte-for-byte identical to the root CSV; the source/version relationship was not documented.
 
-No dataset license or permission record is included here. The presence of the corpus and derived files in this repository is not a determination that they may be redistributed. Their source, reuse rights, and continued inclusion need maintainer review; do not assume that public availability of the source or repository grants those rights. The original corpus, reports, models, and derived data have been preserved unchanged for that review.
+No dataset license or permission record is included here. The presence of derived files in this repository is not a determination that they may be redistributed; serialized data may contain corpus text. Their source, reuse rights, and continued inclusion need maintainer review. Do not assume that public availability of the source or repository grants those rights.
 
 ## Saved results and reproduction status
 
 Notebook outputs and saved artifacts represent historical work. The repository contains pickled corpora/dataframes, Doc2Vec models and vectors, and an HDF5 sequence-model file. They are not newly reproduced or independently validated results, and no new metrics are claimed here.
 
-A clean reproduction was not performed. There is no dependency manifest or documented setup, and the tracked `venv/` referenced a machine-specific Python 3.8 environment that is no longer present. Notebook execution may also require language-model or tokenizer resources and substantial memory/GPU capacity. Until a supported setup is documented and run, the saved outputs should not be treated as proof that the notebooks execute end to end today.
+A clean reproduction was not performed. There is no dependency manifest or documented setup, the raw CSV expected by the notebooks is not included, and the tracked `venv/` referenced a machine-specific Python 3.8 environment that is no longer present. Notebook execution may also require language-model or tokenizer resources and substantial memory/GPU capacity. Until permitted data access and a supported setup are documented and run, the saved outputs should not be treated as proof that the notebooks execute end to end today.
 
 ## Repository contents and housekeeping
 
-- `kaggle_poem_dataset.csv` is the working CSV referenced by the notebooks. `archive.zip` is retained as a distinct historical copy pending source/version review.
-- Pickles, `.npy` vectors, Doc2Vec models, and the `.hdf5` model file are retained as research artifacts, not disposable build output.
+- The notebooks reference `kaggle_poem_dataset.csv`, which is not included. Use the cited Kaggle source subject to its terms and any applicable rights review. The non-identical `archive.zip` copy was also removed.
+- Pickles, `.npy` vectors, Doc2Vec models, and the `.hdf5` model file remain as historical research artifacts pending the same rights review; they are not disposable build output.
 - `.ipynb_checkpoints/` contains tracked notebook snapshots and `.idea/` contains tracked IDE metadata. Both are preserved; ignore rules prevent newly generated local copies from being added.
 - The tracked `venv/` was a local environment tied to a missing absolute Python path, not a portable setup. It has been removed; no replacement environment or dependency set is claimed.
 
