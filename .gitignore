@@ -7,3 +7,6 @@ line_vectors
 poem_vector_2000.pkl
 *.pkl
 *.docx
+/venv/
+/.ipynb_checkpoints/
+/.idea/
