@@ -10,3 +10,5 @@ poem_vector_2000.pkl
 /venv/
 /.ipynb_checkpoints/
 /.idea/
+/kaggle_poem_dataset.csv
+/archive.zip
