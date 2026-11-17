@@ -1,71 +1,163 @@
-# Poetry NLP: exploring poetic form and language
+# Poetry NLP: mapping 14,600 poems by how they use language
 
-How can a poem be represented as data without losing sight of its lines, vocabulary, and structure? This exploratory Python project studies a Poetry Foundation corpus through descriptive analysis, part-of-speech tagging, document embeddings, and clustering, then experiments with sequence models for text and line prediction.
+What structure shows up when you turn a large poetry corpus into data? This project
+cleans the full Poetry Foundation collection (15,652 poems by 3,310 poets), profiles
+it at the poem and line level, embeds every poem with Doc2Vec, and compares four
+clustering methods on the embeddings. It then describes the clusters by their
+vocabulary and grammar and fits a topic model for a second view.
 
-The interesting thread is the shift between scales: whole-poem representations for similarity and clustering, and line-level features for examining structure. This is a notebook-based research archive, not a finished poetry generator or a packaged application. The original work followed promising questions and practical constraints rather than a single production pipeline.
+The short answer: the strongest signal in the embeddings is **diction and register,
+not subject matter**. The first principal component runs from Elizabethan and
+Romantic diction to plain contemporary speech, and the one split that model
+selection supports is traditional versus modern language.
 
-## Start exploring
+## Findings
 
-**Start with [`poetry_analysis.ipynb`](poetry_analysis.ipynb)** for the broadest walkthrough: cleaning, visual exploration, tagging, Doc2Vec, and several clustering approaches. You can read its saved outputs on GitHub without installing Python or loading any model files.
+### 1. The main axis is a diction gradient
 
-For a shorter overview, open the [presentation]((removed file)) or [written report]((removed file)). The [DOCX writeup]((removed file)) is also preserved. These are historical accounts of the project, including its aspirations; they are not evidence of a finished end-to-end generator.
+K-means on the two-component projection (elbow at k = 6) gives six groups that line up
+along PC1. Ordered by their mean position on that axis, their most over-represented
+terms read as a walk from old diction to new:
 
-## What the notebooks explore
+| Cluster (along PC1) | Poems | Over-represented terms | What stands out |
+| --- | ---: | --- | --- |
+| Early modern diction | 1,458 | love, fair, vain, wit, unto, hast, art, dost, alas | most pronouns of the traditional groups |
+| 18th–19th c. lyric | 1,397 | sweet, oer, heart, thro, winds, heaven, morn, sea | highest adjective share (8.8%) |
+| General lyric | 3,239 | light, world, time, eyes, life, night, old, body | longest poems (34.0 lines on average) |
+| Conversational | 2,906 | dont, want, think, people, really, didnt, tell | most pronouns (14.1%), fewest nouns (20.0%), longest lines (8.8 words), lowest lexical diversity (0.646) |
+| Nature imagery | 2,353 | water, sky, light, blue, wind, leaves, moon, green | most nouns (28.3%), fewest pronouns (8.0%), highest lexical diversity (0.720), shortest poems (24.2 lines) |
+| Body and interior | 3,268 | inside, black, room, hands, white, mother, body, door | concrete domestic and bodily imagery |
 
-| Question | Approach |
-| --- | --- |
-| What does the corpus look like at poem and line level? | pandas-based deduplication and cleaning; distributions of line counts, word counts, word lengths, and lexical diversity; matplotlib and seaborn visualizations. |
-| How can grammatical structure be represented? | spaCy part-of-speech tagging and separate experiments with saved line-level tags. |
-| Can poems be compared beyond surface counts? | Gensim Doc2Vec using distributed bag-of-words (`dm=0`), with 500- and 2,000-dimensional training experiments. |
-| What groupings appear in the embeddings? | Scaling, normalization, PCA, and comparisons of K-means, DBSCAN, agglomerative clustering, and Gaussian mixture models; elbow and silhouette diagnostics. |
-| Can sequence models extend the analysis toward generation? | TensorFlow/Keras token-sequence experiments and a bidirectional LSTM for predicting line vectors. |
+The period labels are a reading of the term lists ("oer" and "thro" are the
+cleaned forms of *o'er* and *thro'*); the dataset carries no dates.
 
-### A few observations from the saved work
+![K-means clusters on the first two principal components](figures/cluster_kmeans.png)
 
-These are **historical notebook outputs**, not freshly reproduced findings or model-performance claims:
+![Cluster profiles: length, diversity and part-of-speech mix relative to the corpus](figures/topics_cluster_profiles.png)
 
-- In the midterm notebook's **Parse, Explore, and Filter** section, the source table has 15,652 rows. Removing duplicate content, duplicate author/title pairs, and missing values leaves 15,607 rows.
-- The line-level analysis makes the effect of filtering visible: its dataframe summaries show 433,998 lines before the word-count outlier filter and 431,229 afterward. These are intermediate dataset sizes, not counts for every later experiment.
-- In the **KMeans** section, the elbow detector returns nine clusters for that particular representation and run. This is an exploratory diagnostic, not validation of nine poetic genres or a best-performing model.
-- The generation experiments expose a practical bottleneck: `nlg.ipynb` records a memory-allocation failure while creating one-hot targets, before a successful end-to-end generation workflow is established.
+### 2. Model selection finds one real boundary
 
-## Notebook map
+| Method (on the PC1/PC2 plane) | Setting | Clusters | Silhouette |
+| --- | --- | ---: | ---: |
+| K-means | best silhouette, k = 2 | 2 | 0.421 |
+| K-means | elbow, k = 6 | 6 | 0.336 |
+| Gaussian mixture | lowest BIC: full covariance | 2 | 0.442 |
+| DBSCAN | best grid point, eps = 0.025, min_samples = 5 | 3 | 0.398 |
+| Agglomerative | complete linkage, cosine, k = 7 | 7 | 0.218 |
 
-The order below is a reading guide, not an execution dependency order. The notebooks overlap and sometimes consume previously saved artifacts.
+The Gaussian mixture's BIC picks two components, and its smaller component (3,049 poems)
+is 92% made of the two traditional-diction clusters above. DBSCAN's best grid point is
+one cluster of 14,467 poems plus two groups of 6 and 7, so density-based clustering
+sees a single continuous body of work. In the full 500-dimensional embedding, K-means
+silhouettes stay below 0.03 for every k from 2 to 20, and PC1 and PC2 together carry
+only 3.7% of the variance (444 components are needed for 99%). The groups in the table
+are useful slices of a continuum, and the diction axis is the part of it that is sharp.
 
-| File | Focus |
-| --- | --- |
-| [`poetry_analysis.ipynb`](poetry_analysis.ipynb) | Main walkthrough, from raw CSV preparation to embedding and clustering comparisons. |
-| [`preprocessing.ipynb`](preprocessing.ipynb) | Earlier dataset cleaning and preparation experiments. |
-| [`preproc_and_ner.ipynb`](preproc_and_ner.ipynb) | Additional preprocessing experiments and text-analysis setup. |
-| [`poems2doc2vec.ipynb`](poems2doc2vec.ipynb) | Tagged-document preparation and 500-dimensional Doc2Vec training. |
-| [`poem_clustering.ipynb`](poem_clustering.ipynb) | Vector reduction, clustering comparisons, and diagnostic plots. |
-| [`syntactic_analysis.ipynb`](syntactic_analysis.ipynb) | Exploration of saved line-level part-of-speech tags. |
-| [`nltk_keras.ipynb`](nltk_keras.ipynb), [`structural_modeling.ipynb`](structural_modeling.ipynb) | Tokenization and structural/sequence-model preparation experiments. |
-| [`nlg.ipynb`](nlg.ipynb) | Token-sequence preparation and an LSTM text-generation model definition, with saved errors. |
-| [`line_predicter.ipynb`](line_predicter.ipynb) | Doc2Vec line encoding and bidirectional LSTM line-vector prediction, including training and model saving. |
-| [`nlg_mp.py`](nlg_mp.py) | A small import-only fragment, not a runnable application or pipeline. |
+![K-means inertia and silhouette by k](figures/cluster_kmeans_selection.png)
 
-## Local exploration and setup status
+### 3. Topics: nature, memory, the body and the heart
 
-**Reading is the supported starting point; a clean execution environment has not been verified.** There is no dependency manifest or pinned package set. For local inspection, use a notebook viewer or an existing Jupyter installation. From the repository directory, this opens the main notebook; it does not run its cells:
+A 12-topic NMF model over TF-IDF (8,728-term vocabulary, archaic function words removed)
+gives the subject-matter view. Share of poems where each topic dominates:
+
+![NMF topics](figures/topics_nmf.png)
+
+Topics and clusters agree where you would expect: 57% of the early-modern cluster is
+dominated by the *heart, sweet, soul, fair, art, heaven* topic, and the conversational
+cluster splits between *dont, want, think, look, tell* (30%) and the narrative-memory
+topic *did, knew, left, saw, years* (24%).
+
+### 4. The corpus at a glance
+
+- **15,652 → 14,621 poems.** Deduplication by text and by author/title leaves 15,606;
+  removing length outliers (|z| ≥ 1.5), poems under three lines and scraping artefacts
+  (any "word" of 20+ characters) leaves 14,621.
+- **434,054 → 411,934 lines** after line-length and word-length outlier filters.
+- A typical poem has **23 lines** (mean 29.7); a typical line has **7 words** (mean 6.6).
+  Unique-word share per poem averages **0.676**.
+- spaCy tags 3.04 million tokens: **nouns 23.6%**, verbs 13.8%, adpositions 12.0%,
+  pronouns 11.2%, determiners 11.1%, adjectives 7.2%.
+- The Doc2Vec model (DBOW, 500 dimensions, 50 epochs, 47,416-word vocabulary) is
+  self-consistent: for 500 sampled poems, re-inferring a vector from the poem's words
+  returns that poem as the nearest neighbour every time.
+
+![Poem length, line length and lexical diversity](figures/corpus_distributions.png)
+
+### 5. Sequence models (notebooks/experiments)
+
+The original project also aimed at generation. A word-level LSTM over all lines needs
+one-hot targets of 2,259,717 sequences × 121,325 words, which is 1,021 GiB as float32;
+the notebook records that allocation failing. The line-level alternative predicts the
+next line's Doc2Vec vector from the previous six with a bidirectional LSTM; after one
+epoch its validation log-cosh loss (5.20e-4) matched its training loss. Sparse targets
+with an embedding layer, or a subword language model, are the natural next step.
+
+## Running it
+
+### 1. Get the data
+
+The corpus is the [Complete Poetry Foundation Dataset](https://www.kaggle.com/datasets/johnhallman/complete-poetryfoundationorg-dataset)
+by John Hallman on Kaggle: one CSV, `kaggle_poem_dataset.csv`, with columns
+`Author, Title, Poetry Foundation ID, Content` (15,652 rows). The poems are scraped
+from poetryfoundation.org and remain the work of their authors, so this repository
+contains code and aggregate results only.
+
+With a Kaggle API token in `~/.kaggle/kaggle.json`:
 
 ```shell
-jupyter notebook poetry_analysis.ipynb
+python scripts/download_data.py      # -> data/raw/kaggle_poem_dataset.csv
 ```
 
-Before attempting execution, inspect the notebook's imports and file-loading cells. The main analysis uses pandas, NumPy, SciPy, NLTK, spaCy, Gensim, scikit-learn, matplotlib, seaborn, tqdm, and kneed; the sequence experiments additionally use TensorFlow/Keras. This is an orientation list, not a tested installation recipe. Language resources include spaCy's `en_core_web_sm` and NLTK tokenizer/corpus resources. Older APIs may need compatible library versions.
+Or download the zip from the dataset page and unzip it into `data/raw/`.
 
-Notebooks expect local inputs such as `kaggle_poem_dataset.csv` and saved intermediate files in the working directory. Opening a notebook is not the same as reproducing its outputs: do not use **Run All** until you have reviewed its inputs, environment, and resource requirements.
+### 2. Install
 
-## Data and saved artifacts
+Python 3.10+ (tested on 3.13):
 
-The documented source is John Hallman's [Complete Poetry Foundation Dataset on Kaggle](https://www.kaggle.com/johnhallman/complete-poetryfoundationorg-dataset), drawn from the Poetry Foundation website. The raw `kaggle_poem_dataset.csv` and `archive.zip` are not included. Consult the source's terms and applicable permissions before obtaining or reusing the data; this repository does not establish redistribution rights or assert a project or dataset license.
+```shell
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt      # includes spaCy's en_core_web_sm model
+```
 
-Pickled corpora/dataframes, Doc2Vec models and `.npy` vectors, and `line_sequence_lstm.final.hdf5` remain as historical research artifacts. Derived data may contain corpus text, so its presence is not a grant of reuse rights. **Do not unpickle files or load serialized models from an untrusted source:** loading them can execute code or require unsafe legacy deserialization. None is needed just to browse the notebooks.
+### 3. Run
 
-## Limits to keep in mind
+```shell
+python -m poetry_nlp.pipeline
+```
 
-The corpus and cleaning choices bound the conclusions: deduplication, text normalization, and length-based filtering affect which poetic forms remain visible. Clusters are exploratory groupings, not established literary categories, and the archive does not demonstrate coherent poem generation or measured improvements over a baseline.
+This runs five steps in order; each can also be run alone with `python -m poetry_nlp.<step>`:
 
-Saved outputs can reflect earlier notebook state. Some notebooks contain errors or interrupted cells, and the generation work encountered substantial memory demands. The missing raw CSV, unpinned dependencies, and legacy APIs prevent a claim that the notebooks run end to end today. Treat the archive as a record of methods, experiments, and tradeoffs rather than a turnkey reproducible system.
+| Step | Does | Writes |
+| --- | --- | --- |
+| `prepare` | cleans, deduplicates and filters poems and lines | `data/interim/poems.pkl`, `lines.pkl`, `results/corpus_stats.json` |
+| `syntax` | spaCy part-of-speech profile per poem | `data/interim/poem_pos.pkl`, `results/pos_stats.json` |
+| `embed` | trains Doc2Vec DBOW and embeds every poem (`--vector-size`, `--epochs`) | `models/`, `data/interim/poem_vectors.npy`, `results/embedding.json` |
+| `cluster` | PCA projection; K-means, DBSCAN, agglomerative and GMM with scores | `results/clustering.json` |
+| `topics` | cluster profiles and a 12-topic NMF model | `results/cluster_profiles.csv`, `results/topics.json` |
+
+All figures go to `figures/`. The full run takes about 12 minutes on 4 CPU cores, most
+of it in `embed` and `cluster`. The numbers above come from `results/`, produced by this
+command with the pinned versions.
+
+`pytest` runs the whole chain on a small synthetic corpus in a few seconds.
+
+## Repository layout
+
+```
+poetry_nlp/          pipeline package (config, prepare, syntax, embed, cluster, topics)
+scripts/             download_data.py
+tests/               smoke test on synthetic poems
+results/             metrics and cluster/topic tables from the last full run
+figures/             plots from the last full run
+notebooks/           the original exploratory notebooks
+  poetry_analysis.ipynb      end-to-end walkthrough: cleaning, EDA, tagging, Doc2Vec, clustering
+  preprocessing.ipynb        earlier cleaning and tagging passes
+  preproc_and_ner.ipynb      corpus export and named-entity experiments
+  poems2doc2vec.ipynb        500-dimensional Doc2Vec training
+  poem_clustering.ipynb      clustering comparisons on saved vectors
+  syntactic_analysis.ipynb   frequency of line-level POS tags
+  experiments/               tokenisation and LSTM sequence-model experiments
+```
+
+The notebooks read from `data/` and `models/` relative to their own folder; install
+`requirements-notebooks.txt` to run them. They keep their saved plots and metrics.

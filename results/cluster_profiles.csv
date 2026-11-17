@@ -1,0 +1,7 @@
+cluster,poems,length_in_lines,lexical_diversity,words_per_line,pc1,noun_share,verb_share,adj_share,pron_share,distinctive_terms
+3,1458,28.102,0.674,7.105,-0.272,0.219,0.139,0.079,0.126,"love, fair, vain, wit, unto, hast, art, heart, dost, alas"
+0,1397,26.898,0.687,6.785,-0.177,0.258,0.131,0.088,0.091,"sweet, oer, heart, thro, winds, love, heaven, fair, morn, sea"
+2,3239,34.003,0.66,7.402,-0.015,0.237,0.137,0.073,0.11,"light, world, time, eyes, life, long, love, night, old, body"
+1,2906,32.157,0.646,8.772,0.012,0.2,0.146,0.065,0.141,"dont, want, think, people, really, didnt, good, time, tell, did"
+5,2353,24.235,0.72,6.43,0.108,0.283,0.135,0.078,0.08,"water, sky, light, blue, wind, white, leaves, moon, green, air"
+4,3268,29.038,0.684,7.512,0.123,0.242,0.143,0.067,0.115,"inside, black, room, way, hands, white, blue, mother, body, door"

@@ -1,0 +1,286 @@
+{
+  "tfidf_vocabulary": 8728,
+  "nmf_topics": [
+    {
+      "topic": 0,
+      "share_of_poems": 0.066,
+      "terms": [
+        "time",
+        "life",
+        "world",
+        "words",
+        "things",
+        "end",
+        "mind",
+        "death"
+      ]
+    },
+    {
+      "topic": 1,
+      "share_of_poems": 0.118,
+      "terms": [
+        "heart",
+        "sweet",
+        "soul",
+        "fair",
+        "art",
+        "heaven",
+        "till",
+        "eyes"
+      ]
+    },
+    {
+      "topic": 2,
+      "share_of_poems": 0.128,
+      "terms": [
+        "trees",
+        "leaves",
+        "wind",
+        "tree",
+        "green",
+        "sun",
+        "snow",
+        "sky"
+      ]
+    },
+    {
+      "topic": 3,
+      "share_of_poems": 0.122,
+      "terms": [
+        "did",
+        "knew",
+        "left",
+        "saw",
+        "years",
+        "took",
+        "day",
+        "thought"
+      ]
+    },
+    {
+      "topic": 4,
+      "share_of_poems": 0.114,
+      "terms": [
+        "eyes",
+        "hands",
+        "white",
+        "body",
+        "black",
+        "face",
+        "hair",
+        "mouth"
+      ]
+    },
+    {
+      "topic": 5,
+      "share_of_poems": 0.062,
+      "terms": [
+        "night",
+        "light",
+        "dark",
+        "moon",
+        "sleep",
+        "stars",
+        "darkness",
+        "day"
+      ]
+    },
+    {
+      "topic": 6,
+      "share_of_poems": 0.101,
+      "terms": [
+        "dont",
+        "want",
+        "think",
+        "look",
+        "tell",
+        "says",
+        "good",
+        "youre"
+      ]
+    },
+    {
+      "topic": 7,
+      "share_of_poems": 0.054,
+      "terms": [
+        "man",
+        "old",
+        "woman",
+        "men",
+        "young",
+        "women",
+        "dead",
+        "new"
+      ]
+    },
+    {
+      "topic": 8,
+      "share_of_poems": 0.059,
+      "terms": [
+        "love",
+        "loves",
+        "heart",
+        "loved",
+        "true",
+        "kiss",
+        "lovers",
+        "dear"
+      ]
+    },
+    {
+      "topic": 9,
+      "share_of_poems": 0.051,
+      "terms": [
+        "mother",
+        "father",
+        "child",
+        "son",
+        "children",
+        "daughter",
+        "boy",
+        "mothers"
+      ]
+    },
+    {
+      "topic": 10,
+      "share_of_poems": 0.039,
+      "terms": [
+        "god",
+        "lord",
+        "good",
+        "holy",
+        "gods",
+        "earth",
+        "king",
+        "pray"
+      ]
+    },
+    {
+      "topic": 11,
+      "share_of_poems": 0.086,
+      "terms": [
+        "water",
+        "sea",
+        "river",
+        "waves",
+        "sand",
+        "ocean",
+        "shore",
+        "land"
+      ]
+    }
+  ],
+  "cluster_profiles": [
+    {
+      "cluster": 3,
+      "poems": 1458,
+      "length_in_lines": 28.102,
+      "lexical_diversity": 0.674,
+      "words_per_line": 7.105,
+      "pc1": -0.2720000148,
+      "noun_share": 0.219,
+      "verb_share": 0.139,
+      "adj_share": 0.079,
+      "pron_share": 0.126,
+      "distinctive_terms": "love, fair, vain, wit, unto, hast, art, heart, dost, alas"
+    },
+    {
+      "cluster": 0,
+      "poems": 1397,
+      "length_in_lines": 26.898,
+      "lexical_diversity": 0.687,
+      "words_per_line": 6.785,
+      "pc1": -0.1770000011,
+      "noun_share": 0.258,
+      "verb_share": 0.131,
+      "adj_share": 0.088,
+      "pron_share": 0.091,
+      "distinctive_terms": "sweet, oer, heart, thro, winds, love, heaven, fair, morn, sea"
+    },
+    {
+      "cluster": 2,
+      "poems": 3239,
+      "length_in_lines": 34.003,
+      "lexical_diversity": 0.66,
+      "words_per_line": 7.402,
+      "pc1": -0.0149999997,
+      "noun_share": 0.237,
+      "verb_share": 0.137,
+      "adj_share": 0.073,
+      "pron_share": 0.11,
+      "distinctive_terms": "light, world, time, eyes, life, long, love, night, old, body"
+    },
+    {
+      "cluster": 1,
+      "poems": 2906,
+      "length_in_lines": 32.157,
+      "lexical_diversity": 0.646,
+      "words_per_line": 8.772,
+      "pc1": 0.0120000001,
+      "noun_share": 0.2,
+      "verb_share": 0.146,
+      "adj_share": 0.065,
+      "pron_share": 0.141,
+      "distinctive_terms": "dont, want, think, people, really, didnt, good, time, tell, did"
+    },
+    {
+      "cluster": 5,
+      "poems": 2353,
+      "length_in_lines": 24.235,
+      "lexical_diversity": 0.72,
+      "words_per_line": 6.43,
+      "pc1": 0.1080000028,
+      "noun_share": 0.283,
+      "verb_share": 0.135,
+      "adj_share": 0.078,
+      "pron_share": 0.08,
+      "distinctive_terms": "water, sky, light, blue, wind, white, leaves, moon, green, air"
+    },
+    {
+      "cluster": 4,
+      "poems": 3268,
+      "length_in_lines": 29.038,
+      "lexical_diversity": 0.684,
+      "words_per_line": 7.512,
+      "pc1": 0.1230000034,
+      "noun_share": 0.242,
+      "verb_share": 0.143,
+      "adj_share": 0.067,
+      "pron_share": 0.115,
+      "distinctive_terms": "inside, black, room, way, hands, white, blue, mother, body, door"
+    }
+  ],
+  "cluster_topic_mix": {
+    "0": {
+      "1": 0.412,
+      "2": 0.163
+    },
+    "1": {
+      "0": 0.117,
+      "3": 0.239,
+      "6": 0.296
+    },
+    "2": {
+      "0": 0.106,
+      "2": 0.151,
+      "4": 0.113,
+      "11": 0.105
+    },
+    "3": {
+      "1": 0.57,
+      "8": 0.154
+    },
+    "4": {
+      "2": 0.107,
+      "3": 0.193,
+      "4": 0.212,
+      "6": 0.11
+    },
+    "5": {
+      "2": 0.322,
+      "4": 0.186,
+      "5": 0.115,
+      "11": 0.189
+    }
+  }
+}

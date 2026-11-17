@@ -1,0 +1,397 @@
+{
+  "projection": {
+    "pc1_pc2_explained_variance": [
+      0.0198,
+      0.0167
+    ],
+    "components_for_99pct_variance": 444
+  },
+  "kmeans": {
+    "elbow_k": 6,
+    "best_silhouette_k": 2,
+    "silhouette_at_elbow_2d": 0.336,
+    "sweep": [
+      {
+        "k": 2,
+        "inertia": 335.5166,
+        "silhouette_2d": 0.4213,
+        "silhouette_full_cosine": 0.0275
+      },
+      {
+        "k": 3,
+        "inertia": 215.0707,
+        "silhouette_2d": 0.3737,
+        "silhouette_full_cosine": 0.0235
+      },
+      {
+        "k": 4,
+        "inertia": 177.1141,
+        "silhouette_2d": 0.3262,
+        "silhouette_full_cosine": 0.0216
+      },
+      {
+        "k": 5,
+        "inertia": 146.2283,
+        "silhouette_2d": 0.3219,
+        "silhouette_full_cosine": 0.0204
+      },
+      {
+        "k": 6,
+        "inertia": 121.2835,
+        "silhouette_2d": 0.3358,
+        "silhouette_full_cosine": 0.0149
+      },
+      {
+        "k": 7,
+        "inertia": 107.6964,
+        "silhouette_2d": 0.3185,
+        "silhouette_full_cosine": 0.0149
+      },
+      {
+        "k": 8,
+        "inertia": 96.0487,
+        "silhouette_2d": 0.3211,
+        "silhouette_full_cosine": 0.0146
+      },
+      {
+        "k": 9,
+        "inertia": 87.61,
+        "silhouette_2d": 0.3174,
+        "silhouette_full_cosine": 0.0138
+      },
+      {
+        "k": 10,
+        "inertia": 79.6095,
+        "silhouette_2d": 0.3242,
+        "silhouette_full_cosine": 0.0138
+      },
+      {
+        "k": 11,
+        "inertia": 73.0382,
+        "silhouette_2d": 0.3207,
+        "silhouette_full_cosine": 0.0134
+      },
+      {
+        "k": 12,
+        "inertia": 67.4407,
+        "silhouette_2d": 0.3156,
+        "silhouette_full_cosine": 0.0116
+      },
+      {
+        "k": 13,
+        "inertia": 63.1829,
+        "silhouette_2d": 0.3179,
+        "silhouette_full_cosine": 0.0109
+      },
+      {
+        "k": 14,
+        "inertia": 59.1222,
+        "silhouette_2d": 0.3193,
+        "silhouette_full_cosine": 0.0123
+      },
+      {
+        "k": 15,
+        "inertia": 55.5828,
+        "silhouette_2d": 0.3147,
+        "silhouette_full_cosine": 0.0103
+      },
+      {
+        "k": 16,
+        "inertia": 52.8008,
+        "silhouette_2d": 0.3165,
+        "silhouette_full_cosine": 0.0107
+      },
+      {
+        "k": 17,
+        "inertia": 49.7015,
+        "silhouette_2d": 0.3159,
+        "silhouette_full_cosine": 0.0094
+      },
+      {
+        "k": 18,
+        "inertia": 46.9539,
+        "silhouette_2d": 0.3137,
+        "silhouette_full_cosine": 0.0084
+      },
+      {
+        "k": 19,
+        "inertia": 44.7582,
+        "silhouette_2d": 0.316,
+        "silhouette_full_cosine": 0.0082
+      },
+      {
+        "k": 20,
+        "inertia": 42.9102,
+        "silhouette_2d": 0.3139,
+        "silhouette_full_cosine": 0.0082
+      }
+    ]
+  },
+  "dbscan": {
+    "knee_eps": 0.0111,
+    "best": {
+      "eps": 0.025,
+      "min_samples": 5.0,
+      "n_clusters": 3.0,
+      "noise": 141.0,
+      "silhouette": 0.3982
+    },
+    "grid": [
+      {
+        "eps": 0.011,
+        "min_samples": 5,
+        "n_clusters": 42,
+        "noise": 802,
+        "silhouette": -0.2961
+      },
+      {
+        "eps": 0.011,
+        "min_samples": 10,
+        "n_clusters": 21,
+        "noise": 1854,
+        "silhouette": -0.331
+      },
+      {
+        "eps": 0.011,
+        "min_samples": 25,
+        "n_clusters": 6,
+        "noise": 5739,
+        "silhouette": -0.2759
+      },
+      {
+        "eps": 0.011,
+        "min_samples": 50,
+        "n_clusters": 4,
+        "noise": 9287,
+        "silhouette": -0.3242
+      },
+      {
+        "eps": 0.025,
+        "min_samples": 5,
+        "n_clusters": 3,
+        "noise": 141,
+        "silhouette": 0.3982
+      },
+      {
+        "eps": 0.025,
+        "min_samples": 10,
+        "n_clusters": 3,
+        "noise": 312,
+        "silhouette": 0.278
+      }
+    ]
+  },
+  "agglomerative": {
+    "n_clusters": 7,
+    "linkage": "complete",
+    "metric": "cosine",
+    "silhouette_2d": 0.218
+  },
+  "gmm": {
+    "best_covariance": "full",
+    "best_components": 2,
+    "silhouette_2d": 0.442,
+    "bic": [
+      {
+        "covariance": "spherical",
+        "components": 1,
+        "bic": -34035.6
+      },
+      {
+        "covariance": "spherical",
+        "components": 2,
+        "bic": -35586.1
+      },
+      {
+        "covariance": "spherical",
+        "components": 3,
+        "bic": -36683.4
+      },
+      {
+        "covariance": "spherical",
+        "components": 4,
+        "bic": -36862.0
+      },
+      {
+        "covariance": "spherical",
+        "components": 5,
+        "bic": -37272.7
+      },
+      {
+        "covariance": "spherical",
+        "components": 6,
+        "bic": -37160.2
+      },
+      {
+        "covariance": "spherical",
+        "components": 7,
+        "bic": -37201.1
+      },
+      {
+        "covariance": "spherical",
+        "components": 8,
+        "bic": -37214.4
+      },
+      {
+        "covariance": "spherical",
+        "components": 9,
+        "bic": -37202.5
+      },
+      {
+        "covariance": "spherical",
+        "components": 10,
+        "bic": -37142.5
+      },
+      {
+        "covariance": "tied",
+        "components": 1,
+        "bic": -34120.9
+      },
+      {
+        "covariance": "tied",
+        "components": 2,
+        "bic": -37333.1
+      },
+      {
+        "covariance": "tied",
+        "components": 3,
+        "bic": -37231.1
+      },
+      {
+        "covariance": "tied",
+        "components": 4,
+        "bic": -37318.4
+      },
+      {
+        "covariance": "tied",
+        "components": 5,
+        "bic": -37296.6
+      },
+      {
+        "covariance": "tied",
+        "components": 6,
+        "bic": -37254.2
+      },
+      {
+        "covariance": "tied",
+        "components": 7,
+        "bic": -37207.8
+      },
+      {
+        "covariance": "tied",
+        "components": 8,
+        "bic": -37228.1
+      },
+      {
+        "covariance": "tied",
+        "components": 9,
+        "bic": -37174.2
+      },
+      {
+        "covariance": "tied",
+        "components": 10,
+        "bic": -37145.0
+      },
+      {
+        "covariance": "diag",
+        "components": 1,
+        "bic": -34130.5
+      },
+      {
+        "covariance": "diag",
+        "components": 2,
+        "bic": -36739.7
+      },
+      {
+        "covariance": "diag",
+        "components": 3,
+        "bic": -37161.1
+      },
+      {
+        "covariance": "diag",
+        "components": 4,
+        "bic": -37213.3
+      },
+      {
+        "covariance": "diag",
+        "components": 5,
+        "bic": -37264.2
+      },
+      {
+        "covariance": "diag",
+        "components": 6,
+        "bic": -37221.6
+      },
+      {
+        "covariance": "diag",
+        "components": 7,
+        "bic": -37188.0
+      },
+      {
+        "covariance": "diag",
+        "components": 8,
+        "bic": -37158.2
+      },
+      {
+        "covariance": "diag",
+        "components": 9,
+        "bic": -37139.8
+      },
+      {
+        "covariance": "diag",
+        "components": 10,
+        "bic": -37068.0
+      },
+      {
+        "covariance": "full",
+        "components": 1,
+        "bic": -34120.9
+      },
+      {
+        "covariance": "full",
+        "components": 2,
+        "bic": -37398.8
+      },
+      {
+        "covariance": "full",
+        "components": 3,
+        "bic": -37358.5
+      },
+      {
+        "covariance": "full",
+        "components": 4,
+        "bic": -37289.8
+      },
+      {
+        "covariance": "full",
+        "components": 5,
+        "bic": -37268.5
+      },
+      {
+        "covariance": "full",
+        "components": 6,
+        "bic": -37217.5
+      },
+      {
+        "covariance": "full",
+        "components": 7,
+        "bic": -37192.5
+      },
+      {
+        "covariance": "full",
+        "components": 8,
+        "bic": -37139.2
+      },
+      {
+        "covariance": "full",
+        "components": 9,
+        "bic": -37091.3
+      },
+      {
+        "covariance": "full",
+        "components": 10,
+        "bic": -37026.7
+      }
+    ]
+  }
+}

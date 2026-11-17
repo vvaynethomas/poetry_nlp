@@ -1,0 +1,8 @@
+{
+  "poems": 14621,
+  "vector_size": 500,
+  "epochs": 50,
+  "vocabulary": 47416,
+  "self_retrieval_top1": 1.0,
+  "self_retrieval_top10": 1.0
+}
