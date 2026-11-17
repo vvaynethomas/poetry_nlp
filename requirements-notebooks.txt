@@ -1,0 +1,7 @@
+# Extra packages used by the exploratory notebooks in notebooks/
+-r requirements.txt
+jupyter
+seaborn==0.13.2
+nltk==3.9.1
+tqdm
+tensorflow  # notebooks/experiments only

@@ -1,14 +1,24 @@
-
-*.hdf5
-poem_doc2vec_dbow2000.pkl.docvecs.vectors_docs.npy
-*.npy
-poem_vectors
-line_vectors
-poem_vector_2000.pkl
+# Data and generated artifacts (rebuilt by the pipeline)
+data/
+models/
 *.pkl
-*.docx
-/venv/
-/.ipynb_checkpoints/
-/.idea/
-/kaggle_poem_dataset.csv
-/archive.zip
+*.npy
+*.hdf5
+*.csv
+!results/*.csv
+*.zip
+
+# Environments and caches
+venv/
+.venv/
+env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Editors and OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
